@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<ui:composition template="/modelos/layoutPrincipal.xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml">
+
+	<ui:define name="tituloJanela">#{siteControlador.webinfo.web_titulo} &#149; #{msg.contato}</ui:define>
+	
+	<ui:define name="pesquisa">
+	<!-- visualização de TITULO PERSONALIZADO da página de contato -->
+	<div id="pesquisa">
+		<p class="titulo"><h:outputText value="#{msg.contato}" styleClass="text"/></p>
+	</div>
+	</ui:define>
+
+	<ui:define name="mainContent">
+	
+		<div id="colunaEsquerda">
+		<h:panelGrid columns="3">
+			<h:outputLabel for="nome" value="#{msg.nome}" styleClass="rotulos"/>
+			<h:inputText type="text" id="nome" value="#{contatoControlador.nome}" styleClass="edit" required="true" size="29" requiredMessage="#{msg.campoObrigatorio}" >
+			</h:inputText>
+			<h:message for="nome" styleClass="erro"/>		
+			            
+			<h:outputLabel for="email" value="#{msg.email}" styleClass="rotulos"/>
+			<h:inputText type="text" id="email" value="#{contatoControlador.email}" styleClass="edit" required="true" size="29" validator="#{uteis.validaEmail}" requiredMessage="#{msg.campoObrigatorio}" />
+			<h:message for="email" styleClass="erro"/>		
+		
+			<h:outputLabel for="assunto" value="#{msg.assunto}" styleClass="rotulos"/>
+			<h:inputText type="text" id="assunto" value="#{contatoControlador.assunto}" styleClass="edit" size="29" />
+			<h:outputLabel value="" >&#160;</h:outputLabel>	
+
+			<h:outputLabel for="mensagem" value="#{msg.mensagem}" styleClass="rotulos"/>
+			<h:inputTextarea cols="22" rows="9" type="text" id="mensagem" value="#{contatoControlador.mensagem}" styleClass="edit" required="true" requiredMessage="#{msg.campoObrigatorio}"/>
+			<h:message for="mensagem" styleClass="erro"/>		
+			</h:panelGrid>
+						
+		<h:panelGrid columns="2">
+			<h:commandButton type="submit" action="#{contatoControlador.enviar}" value="#{msg.enviar}"/>
+			<h:messages globalOnly="#{true}" infoClass="aviso" warnClass="advertencia" errorClass="erro" />
+		</h:panelGrid>
+		</div>
+		
+		<div id="colunaDireita">
+			<ui:repeat value="#{siteControlador.webinfo}" var="item">
+			
+			<h:panelGroup rendered="#{!empty item.web_localizacao}">
+			<h:outputText value="#{msg.localizacao}" styleClass="titulosContato"/><br />
+			<h:outputText value="#{item.web_localizacao}" escape="false"/><br />
+			</h:panelGroup>
+			
+			<h:panelGroup rendered="#{!empty item.web_endereco}">
+			<h:outputText value="#{msg.endereco}" styleClass="titulosContato"/><br />
+			<h:outputText value="#{item.web_endereco}, #{item.web_numero} #{item.web_bairro} CEP:#{item.web_cep} #{item.web_cidade} #{item.web_estado}" /><br /><br />
+			</h:panelGroup>
+			
+			<h:panelGroup rendered="#{!empty item.web_email}">
+			<h:outputText value="#{msg.faleConosco}" styleClass="titulosContato"/><br />
+			<h:outputLabel for="email" value="#{msg.email} "/><h:outputLink id="email" value="mailto:#{item.web_email}" title="#{msg.envieEmail}" styleClass="linksContatos">#{item.web_email}</h:outputLink><br />
+			</h:panelGroup>
+			
+			<h:panelGroup rendered="#{!empty item.web_messenger}">
+			<h:outputText value="#{msg.messenger} #{item.web_messenger}" styleClass="linksContatos"/><br />
+			</h:panelGroup>
+			
+			<h:panelGroup rendered="#{!empty item.web_skype}">
+			<h:outputLabel value="#{msg.skype}" for="skype"/><h:outputLink id="skype" value="skype:#{item.web_skype}?call" title="#{msg.skypeMe}" styleClass="linksContatos">#{item.web_skype}</h:outputLink><br />
+			</h:panelGroup>
+			
+			<h:panelGroup rendered="#{!empty item.web_telefone}">
+			<h:outputText value="#{msg.telefone} #{item.web_telefone}" /><br /><br />
+			</h:panelGroup>
+		
+			<h:panelGroup rendered="#{!empty item.web_blog}">
+			<h:outputText value="#{msg.blog}" styleClass="titulosContato"/><br />
+			<h:outputLink value="#{item.web_blog}" title="#{msg.sigaBlog}" styleClass="linksContatos">#{item.web_blog}</h:outputLink>
+			</h:panelGroup>
+			</ui:repeat>
+		</div>
+	</ui:define>
+
+</ui:composition>

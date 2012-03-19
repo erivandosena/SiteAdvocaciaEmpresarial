@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<div id="menuSuperiorAdm">
+	<!-- Inicio menu superior -->
+	<ul>
+    	<li><h:outputLink value="inicial.jsf">#{msg.inicial}</h:outputLink></li>
+    	<li><h:outputLink value="listarWebsite.jsf">#{msg.cadastro}</h:outputLink></li>
+   		<li><h:outputLink value="listarPaginas.jsf">#{msg.paginas}</h:outputLink></li>
+   		<li><h:outputLink value="listarLinks.jsf">#{msg.linksUteis}</h:outputLink></li>
+   		<li><h:outputLink value="listarPublicacoes.jsf">#{msg.publicacoes}</h:outputLink></li>
+    	<li><h:outputLink value="listarUsuarios.jsf">#{msg.usuarios}</h:outputLink></li>
+    	<li><h:commandLink action="#{administradorControlador.logout}" immediate="true">#{msg.sair}</h:commandLink></li>
+	</ul>
+	<!-- Final menu superior -->
+	</div>
+	<!-- Inicio logomarca e slogan -->
+	<div id="logo">
+		<h:outputLink value="#{facesContext.externalContext.request.contextPath}/inicial.jsf" title="#{msg.cliqueAqui}">
+			<h:graphicImage value="/ckfinder/userfiles/images/img_logo.gif" alt="" styleClass="imgLogo" />
+		</h:outputLink>
+	</div>
+	<h:outputText value="#{msg.areaAdminSite}" styleClass="logoSlogan" />
+	<!-- Final logomarca e slogan -->
+	<!-- Inicio imagem destaque -->
+  	<h6>#{msg.administrador}</h6>
+  
+</ui:composition>

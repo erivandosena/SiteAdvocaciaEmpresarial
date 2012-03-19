@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<ui:composition template="/adm/modelosAdm/layoutPrincipalAdm.xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml">
+
+	<ui:define name="tituloJanela">#{msg.administrador} &#45; #{msg.linksUteis}</ui:define>
+
+	<ui:define name="mainContentAdm">
+
+		<fieldset>
+		<legend>#{msg.listaCadastros} &#8226; #{msg.linksUteis}</legend>
+
+		<h:dataTable value="#{linkControlador.todos}" var="item" columnClasses=", colunaDireita,colunaEsquerda" 
+		headerClass="cabecalho" rowClasses="celulaSuperior, celulaInferior" styleClass="tabela">  	
+		
+		<h:column>
+			<f:facet name="header">#{msg.nome}</f:facet>
+			<h:outputText value="#{item.lin_nome}" />
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">#{msg.edicao}</f:facet>
+			<h:commandLink value="#{msg.atualizar}" action="formLink?faces-redirect=true&amp;includeViewParams=true">
+			<f:setPropertyActionListener target="#{linkControlador.link}" value="#{item}"/>
+			</h:commandLink>
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">#{msg.baixa}</f:facet>
+			<h:commandLink value="#{msg.excluir}" action="#{linkControlador.excluir}" onclick="javascript:if (!confirm('#{msg.mensagemPergunta}')) return false;">
+			<f:setPropertyActionListener target="#{linkControlador.link}" value="#{item}"/>
+			</h:commandLink>
+		</h:column>
+			
+		</h:dataTable>
+
+		<h:panelGrid columns="2">
+			<h:commandButton value="#{msg.novo}" action="#{linkControlador.novoLink}" immediate="true" styleClass="botoes"/>
+			<h:messages infoClass="aviso" warnClass="advertencia" errorClass="erro" />
+		</h:panelGrid>
+
+		</fieldset>
+
+	</ui:define>
+
+</ui:composition>

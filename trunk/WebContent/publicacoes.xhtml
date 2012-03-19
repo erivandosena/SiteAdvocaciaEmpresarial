@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<ui:composition template="/modelos/layoutPrincipal.xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml">
+	
+	<ui:define name="tituloJanela">#{siteControlador.webinfo.web_titulo} &#149; #{msg.publicacoes}</ui:define>
+
+	<ui:define name="mainContent">
+	
+	<div id="publicacoes">
+	<h2>#{msg.todasPublicacoes}</h2>
+    <ul>
+		<ui:repeat value="#{siteControlador.todasPub}" var="campo">
+			<li>
+			<h:outputLink value="#{facesContext.externalContext.request.contextPath}/conteudoPub.jsf?p=#{campo.pub_cod}" title="#{campo.pub_legenda} #{msg.por} #{campo.pub_autor}">
+			<h:outputText value="#{campo.pub_data}" style="padding-right:5px;font-weight:bold;">
+			<f:convertDateTime type="date" dateStyle="short" timeZone="GMT-3" locale="pt_BR" pattern="dd/MM/yyyy"/>
+			</h:outputText>
+			#{campo.pub_titulo}</h:outputLink>
+			</li>
+		</ui:repeat>
+	</ul>
+  	</div>
+  	
+	</ui:define>
+
+</ui:composition>

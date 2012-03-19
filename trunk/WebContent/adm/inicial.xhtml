@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<ui:composition template="/adm/modelosAdm/layoutPrincipalAdm.xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml">
+	
+	<ui:define name="tituloJanela">#{msg.administrador} &#45; #{msg.areaAdminSite}</ui:define>
+
+	<ui:define name="mainContentAdm">
+		<h:panelGroup rendered="#{administradorControlador.logado}">	
+		<p>#{msg.bemVindo} <strong>#{sessionScope['usuNome']}</strong>&#33;</p>
+		</h:panelGroup>
+	</ui:define>		
+
+</ui:composition>

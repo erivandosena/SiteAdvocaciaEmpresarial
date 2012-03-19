@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<ui:composition template="/adm/modelosAdm/layoutPrincipalAdm.xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml">
+	
+	<ui:define name="tituloJanela">#{msg.administrador} &#45; #{msg.linksUteis}</ui:define>
+
+	<ui:define name="mainContentAdm">
+
+		<fieldset>
+		<legend>#{msg.formularioCadastro} &#8226; #{msg.linksUteis}</legend>
+		
+		<div id="estruturaDireita">
+			<h:messages showSummary="#{true}" infoClass="aviso" warnClass="advertencia" errorClass="erro" />
+		</div>
+		
+		<h:panelGrid columns="2">
+			<h:outputLabel for="codigo" value="#{msg.codigo}" rendered="#{!empty linkControlador.link.lin_cod}" styleClass="rotulos"/>
+			<h:inputText id="codigo" value="#{linkControlador.link.lin_cod}" rendered="#{!empty linkControlador.link.lin_cod}" readonly="#{!empty linkControlador.link.lin_cod}" styleClass="edit"/>
+			
+			<h:outputLabel for="nome" value="#{msg.nome}" styleClass="rotulos"/>
+			<h:inputText id="nome" value="#{linkControlador.link.lin_nome}" size="30" maxlength="40" required="true" requiredMessage="#{msg.nome} &#62;&#62; #{msg.campoObrigatorio}" styleClass="edit"/>
+			
+			<h:outputLabel for="url" value="#{msg.url} #{msg.exemploUrl}" styleClass="rotulos"/>
+			<h:inputText id="url" value="#{linkControlador.link.lin_url}" size="60" maxlength="250" required="true" requiredMessage="#{msg.url} &#62;&#62; #{msg.campoObrigatorio}" styleClass="edit"/>
+		</h:panelGrid> 
+		
+		<h:panelGrid columns="2">
+			<h:commandButton value="#{msg.salvar}" action="#{linkControlador.salvar}" styleClass="botoes"/>
+			<h:commandButton value="#{msg.cancelar}" action="listarLinks" immediate="true" styleClass="botoes"/>
+		</h:panelGrid>
+		
+		</fieldset>
+
+	</ui:define>
+
+</ui:composition>

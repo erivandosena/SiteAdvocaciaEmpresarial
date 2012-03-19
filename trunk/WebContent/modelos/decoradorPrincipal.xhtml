@@ -1,0 +1,98 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xml:lang="pt-br">
+
+	<ui:composition>
+
+		<h:outputStylesheet library="css" name="style.css" target="body" /> 
+
+		<h:form id="decFormSite" prependId="false">
+    
+			<div id="conteinerTopo">
+			
+			</div>
+			
+			<div id="conteinerConteudo">
+	
+				<!-- TEMPLATE SUPERIOR -->
+				<div id="header">
+				
+					<!-- inicio insert cabecalho -->
+					<ui:insert name="header">
+					
+						<ui:include src="/modelos/layoutTopo.xhtml" />
+						
+					</ui:insert>
+					<!-- final insert cabecalho -->
+		
+					<!-- inicio insert pesquisa -->	
+					<ui:insert name="pesquisa">
+					
+						<ui:include src="/modelos/layoutPesquisa.xhtml" />
+						
+					</ui:insert>
+					<!-- final insert pesquisa -->
+				
+				</div>
+				<!-- TEMPLATE SUPERIOR -->
+		
+				<!-- TEMPLATE CONTEUDO -->
+				<div id="mainContent">
+				
+					<!-- inicio insert conteudo -->
+					<ui:insert name="mainContent">
+						
+					</ui:insert> 
+					<!-- final insert conteudo -->
+					
+				</div>
+				<!-- TEMPLATE CONTEUDO -->
+		
+			</div>
+	
+			<!-- DIV DINAMICO -->
+			<ui:repeat value="#{siteControlador.webinfo}" var="item">
+				
+				<!-- inicio redes sociais -->
+				<div id="redes">
+				
+					<h:outputLink value="#{item.web_orkut}" title="Participe!" rendered="#{!empty item.web_orkut}" styleClass="destaque">#{msg.orkut}</h:outputLink>
+					<h:outputLink value="#{item.web_twitter}" title="Participe!" rendered="#{!empty item.web_twitter}" styleClass="destaque">#{msg.twitter}</h:outputLink>
+					<h:outputLink value="#{item.web_facebook}" title="Participe!" rendered="#{!empty item.web_facebook}" styleClass="destaque">#{msg.facebook}</h:outputLink>
+					<h:outputLink value="#{item.web_linkedin}" title="Participe!" rendered="#{!empty item.web_linkedin}" styleClass="destaque">#{msg.linkedin}</h:outputLink>
+					<h:outputLink value="#{item.web_flickr}" title="Participe!" rendered="#{!empty item.web_flickr}" styleClass="destaque">#{msg.flickr}</h:outputLink>
+					<h:outputLink value="#{item.web_myspace}" title="Participe!" rendered="#{!empty item.web_myspace}" styleClass="destaque">#{msg.myspace}</h:outputLink>
+					<h:outputLink value="#{item.web_vimeo}" title="Participe!" rendered="#{!empty item.web_vimeo}" styleClass="destaque">#{msg.vimeo}</h:outputLink>
+					<h:outputLink value="#{item.web_youtube}" title="Participe!" rendered="#{!empty item.web_youtube}" styleClass="destaque">#{msg.youtube}</h:outputLink>
+					
+				</div>
+				<!-- final redes sociais -->
+					
+			</ui:repeat>
+			<!-- DIV DINAMICO -->
+				
+			<!-- TEMPLATE RODAPE -->
+			<div id="conteinerRodape">
+	
+				<div id="footer">
+					
+					<!-- inicio insert rodape -->
+					<ui:insert name="footer">
+						
+						<ui:include src="/modelos/layoutRodape.xhtml" />
+							
+					</ui:insert> 
+					<!-- final insert rodape -->
+						
+				</div>
+
+			</div>
+			<!-- TEMPLATE RODAPE -->
+    
+		</h:form>
+
+	</ui:composition>
+
+</html>

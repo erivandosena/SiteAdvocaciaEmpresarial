@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.prime.com.tr/ui"
+	xml:lang="pt-br">
+	
+<h:head>
+	<title>#{msg.administrador} - #{msg.cadastro}</title>
+	<link rel="shortcut icon" type="image/x-icon" href="#{facesContext.externalContext.request.contextPath}/favicon.ico" />
+    <link rel="icon" type="image/gif" href="#{facesContext.externalContext.request.contextPath}/animated_favicon1.gif" />
+
+	<script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
+</h:head>
+
+<h:body>
+
+<ui:decorate template="/adm/modelosAdm/decoradorPrincipalAdm.xhtml">
+
+	<ui:define name="mainContentAdm">
+	
+		<fieldset>
+		<legend>#{msg.formularioCadastro}</legend>
+
+		<h:panelGrid columns="1">
+			<h:outputLabel value="#{msg.codigo}" rendered="#{!empty websiteControlador.website.web_cod}" styleClass="rotulos"/>
+			<h:inputText id="codigo" value="#{websiteControlador.website.web_cod}" rendered="#{!empty websiteControlador.website.web_cod}" 
+			readonly="#{!empty websiteControlador.website.web_cod}" styleClass="edit" />
+			
+			<h:outputLabel value="#{msg.titulo}" styleClass="rotulos"/>
+			<h:inputText id="titulo" value="#{websiteControlador.website.web_titulo}" required="true" requiredMessage="#{msg.campoObrigatorio}" size="25" maxlength="100" styleClass="edit" />
+			<h:message for="titulo" styleClass="erro"/>
+			
+			<h:outputLabel value="#{msg.slogan}" styleClass="rotulos"/>
+			<h:inputText id="slogan" value="#{websiteControlador.website.web_slogan}" size="50" maxlength="50" styleClass="edit" />
+					
+			<h:outputLabel value="#{msg.apresentacao}" styleClass="rotulos"/>
+			<h:inputTextarea id="descricao" rows="20" cols="72" value="#{websiteControlador.website.web_descricao}" styleClass="edit"/>
+		   
+		    <script type="text/javascript">
+			//<![CDATA[
+			// Replace the <textarea id="editor1"> with an CKEditor instance.
+			var editor1 = CKEDITOR.replace( 'descricao', {
+			extraPlugins : 'autogrow',
+			// kama, office2003, v2
+			skin : 'kama',
+			width : '600',
+			//ckfinder
+			filebrowserBrowseUrl : 		'../ckfinder/ckfinder.html',
+ 			filebrowserImageBrowseUrl : '../ckfinder/ckfinder.html?type=Images',
+ 			filebrowserFlashBrowseUrl : '../ckfinder/ckfinder.html?type=Flash',
+ 			filebrowserUploadUrl : 	    '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+ 			filebrowserImageUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+ 			filebrowserFlashUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
+ 			filebrowserWindowWidth : 	'800',
+ 			filebrowserWindowHeight : 	'600'
+ 			//ckfinder
+			} 
+			);
+			
+			//]]>
+			</script>
+			
+			<h:outputLabel value="#{msg.localizacao}" styleClass="rotulos"/>
+			<h:inputTextarea id="localizacao" rows="4" cols="72" value="#{websiteControlador.website.web_localizacao}" styleClass="edit"/>
+			<script type="text/javascript">
+			//<![CDATA[
+			// Replace the <textarea id="editor1"> with an CKEditor instance.
+			var editor2 = CKEDITOR.replace( 'localizacao', {
+			extraPlugins : 'autogrow',
+			// kama, office2003, v2
+			skin : 'kama',
+			width : '600',
+			//ckfinder
+			filebrowserBrowseUrl : 		'../ckfinder/ckfinder.html',
+ 			filebrowserImageBrowseUrl : '../ckfinder/ckfinder.html?type=Images',
+ 			filebrowserFlashBrowseUrl : '../ckfinder/ckfinder.html?type=Flash',
+ 			filebrowserUploadUrl : 	    '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+ 			filebrowserImageUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+ 			filebrowserFlashUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
+ 			filebrowserWindowWidth : 	'800',
+ 			filebrowserWindowHeight : 	'600'
+ 			//ckfinder
+			} );
+			//]]>
+			</script>
+			
+			<h:outputLabel value="#{msg.proprietario}" styleClass="rotulos"/>
+			<h:inputText id="proprietario" value="#{websiteControlador.website.web_proprietario}" size="50" maxlength="50" styleClass="edit" />
+						
+			<h:outputLabel value="#{msg.endereco}" styleClass="rotulos"/>
+			<h:inputText id="endereco" value="#{websiteControlador.website.web_endereco}" size="50" maxlength="100" styleClass="edit"/>
+			
+			<h:outputLabel value="#{msg.numero}" styleClass="rotulos"/>
+			<h:inputText id="numero" value="#{websiteControlador.website.web_numero}" size="5" maxlength="10" styleClass="edit"/>
+			
+			<h:outputLabel value="#{msg.bairro}" styleClass="rotulos"/>
+			<h:inputText id="bairro" value="#{websiteControlador.website.web_bairro}" size="25" maxlength="40" styleClass="edit"/>
+			
+			<h:outputLabel value="#{msg.cep}" styleClass="rotulos"/>
+			<h:inputText id="cep" value="#{websiteControlador.website.web_cep}" size="10" maxlength="10" styleClass="edit"/>
+			
+			<h:outputLabel value="#{msg.estado}" styleClass="rotulos"/>
+			<h:selectOneMenu id="estado" value="#{websiteControlador.website.web_estado}" onchange="submit()" valueChangeListener="#{websiteControlador.retornaUf}" styleClass="edit">
+				<f:selectItem itemValue="" itemLabel="#{msg.selecione}" /> 
+				<f:selectItems value="#{ufEstados.estados}" />	
+			</h:selectOneMenu> 
+			
+			<h:outputLabel value="#{msg.cidade}" styleClass="rotulos"/>
+			<h:selectOneMenu id="cidade" value="#{websiteControlador.website.web_cidade}" styleClass="edit">
+				<f:selectItem itemValue="" itemLabel="#{msg.selecione}" /> 
+				<f:selectItems value="#{websiteControlador.cidades}" />	
+			</h:selectOneMenu>
+			
+			<h:outputLabel value="#{msg.telefone}" styleClass="rotulos"/>
+			<h:inputText id="telefone" value="#{websiteControlador.website.web_telefone}" size="10" maxlength="15" styleClass="edit"/>
+			
+			<h:outputLabel value="#{msg.email}" styleClass="rotulos"/>
+			<h:inputText id="email" value="#{websiteControlador.website.web_email}" size="40" maxlength="100" required="true" validator="#{uteis.validaEmail}" requiredMessage="Campo obrigatório." styleClass="edit"/>
+			<h:message for="email" styleClass="erro"/>
+			
+			<h:outputLabel value="#{msg.site} #{msg.exemploUrl}" styleClass="rotulos"/>
+			<h:inputText id="site" value="#{websiteControlador.website.web_site}" size="40" maxlength="50" styleClass="edit"/>
+			
+			<h:outputLabel value="#{msg.blog} #{msg.exemploUrl}" styleClass="rotulos"/>
+			<h:inputText id="blog" value="#{websiteControlador.website.web_blog}" size="40" maxlength="250" styleClass="edit"/>
+			
+			<h:outputLabel value="#{msg.messenger}" styleClass="rotulos"/>
+			<h:inputText id="messenger" value="#{websiteControlador.website.web_messenger}" size="40" maxlength="100" styleClass="edit"/>
+			
+			<h:outputLabel value="#{msg.skype} #{msg.exemploUrl}" styleClass="rotulos"/>
+			<h:inputText id="skype" value="#{websiteControlador.website.web_skype}" size="40" maxlength="50" styleClass="edit"/>
+			
+			<h:outputLabel value="#{msg.orkut} #{msg.exemploUrl}" styleClass="rotulos"/>
+			<h:inputText id="orkut" value="#{websiteControlador.website.web_orkut}" size="40" maxlength="250" styleClass="edit"/>
+			
+			<h:outputLabel value="#{msg.twitter} #{msg.exemploUrl}" styleClass="rotulos"/>
+			<h:inputText id="twitter" value="#{websiteControlador.website.web_twitter}" size="40" maxlength="250" styleClass="edit"/>
+			
+			<h:outputLabel value="#{msg.youtube} #{msg.exemploUrl}" styleClass="rotulos"/>
+			<h:inputText id="youtube" value="#{websiteControlador.website.web_youtube}" size="40" maxlength="250" styleClass="edit"/>
+			
+			<h:outputLabel value="#{msg.facebook} #{msg.exemploUrl}" styleClass="rotulos"/>
+			<h:inputText id="facebook" value="#{websiteControlador.website.web_facebook}" size="40" maxlength="250" styleClass="edit"/>
+			
+			<h:outputLabel value="#{msg.linkedin} #{msg.exemploUrl}" styleClass="rotulos"/>
+			<h:inputText id="linkedin" value="#{websiteControlador.website.web_linkedin}" size="40" maxlength="250" styleClass="edit"/>
+			
+			<h:outputLabel value="#{msg.flickr} #{msg.exemploUrl}" styleClass="rotulos"/>
+			<h:inputText id="flickr" value="#{websiteControlador.website.web_flickr}" size="40" maxlength="250" styleClass="edit"/>
+			
+			<h:outputLabel value="#{msg.myspace} #{msg.exemploUrl}" styleClass="rotulos"/>
+			<h:inputText id="myspace" value="#{websiteControlador.website.web_myspace}" size="40" maxlength="250" styleClass="edit"/>
+			
+			<h:outputLabel value="#{msg.vimeo} #{msg.exemploUrl}" styleClass="rotulos"/>
+			<h:inputText id="vimeo" value="#{websiteControlador.website.web_vimeo}" size="40" maxlength="250" styleClass="edit"/>
+			
+			<h:outputLabel value="#{msg.imagem}" styleClass="rotulos"/>
+
+ 			<p:graphicImage id="imagem" value="#{websiteControlador.imagem}" style="border:none" cache="false"/>
+ 			<h:message for="imagem" />
+ 			
+ 			<h:outputText id="arquivo" value="#{websiteControlador.nomeArquivoSelecionado}" escape="false"/>
+ 			
+ 			<h:panelGroup rendered="#{websiteControlador.website.web_img_padrao ne null}">
+ 			<h:commandButton id="remover" value="#{msg.remover}" action="#{websiteControlador.removeImagem}" styleClass="botoes"/>
+ 			</h:panelGroup>
+			
+			<p:fileUpload id="upload" sizeLimit="3145728" auto="true" widgetVar="uploader" label="#{msg.procurar}" fileUploadListener="#{websiteControlador.handleFileUpload}" allowTypes="*.jpg;*.png;*.gif;*.bmp;" description="Arquivos de Imagens" update="imagem,arquivo" multiple="false" customUI="true"/>
+
+		</h:panelGrid> 
+		<h:panelGrid columns="3">
+			<h:commandButton id="salvar" value="#{msg.salvar}" action="#{websiteControlador.salvar}" styleClass="botoes"/>	
+			<h:commandButton id="cancelar" value="#{msg.cancelar}" action="#{websiteControlador.cancela}" immediate="true" styleClass="botoes"/>
+		</h:panelGrid>
+		
+		</fieldset>
+
+	</ui:define>
+
+</ui:decorate>
+</h:body>
+</html>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.prime.com.tr/ui"
+	xml:lang="pt-br">
+	
+<h:head>
+	<title>#{msg.administrador} - #{msg.publicacoes}</title>
+	<link rel="shortcut icon" type="image/x-icon" href="#{facesContext.externalContext.request.contextPath}/favicon.ico" />
+    <link rel="icon" type="image/gif" href="#{facesContext.externalContext.request.contextPath}/animated_favicon1.gif" />
+
+	<script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
+</h:head>
+
+<h:body>
+
+<ui:decorate template="/adm/modelosAdm/decoradorPrincipalAdm.xhtml">
+
+	<ui:define name="mainContentAdm">
+	
+		<fieldset>
+		<legend>#{msg.formularioCadastro} &#8226; #{msg.publicacoes}</legend>
+
+		<h:panelGrid columns="1">
+			
+			<h:outputLabel value="#{msg.codigo}" rendered="#{!empty publicacaoControlador.publicacao.pub_cod}" styleClass="rotulos"/>
+			<h:inputText id="codigo" value="#{publicacaoControlador.publicacao.pub_cod}" rendered="#{!empty publicacaoControlador.publicacao.pub_cod}" readonly="#{!empty publicacaoControlador.publicacao.pub_cod}" styleClass="edit" />
+			
+			<h:outputLabel value="#{msg.dataPublicado}" rendered="#{publicacaoControlador.publicacao.pub_data ne null}" styleClass="rotulos"/>
+			<h:inputText id="data" value="#{publicacaoControlador.publicacao.pub_data}" rendered="#{publicacaoControlador.publicacao.pub_data ne null}" readonly="#{publicacaoControlador.publicacao.pub_data ne null}" styleClass="edit">
+			<f:convertDateTime dateStyle="short" timeZone="GMT-3" type="date" pattern="dd/MM/yyyy"/>
+			</h:inputText>
+			
+			<h:outputLabel value="#{msg.dataAtualizado}" rendered="#{publicacaoControlador.publicacao.pub_dataalteracao ne null}" styleClass="rotulos"/>
+			<h:inputText id="alteracao" value="#{publicacaoControlador.publicacao.pub_dataalteracao}" rendered="#{publicacaoControlador.publicacao.pub_dataalteracao ne null}" readonly="#{publicacaoControlador.publicacao.pub_dataalteracao ne null}" styleClass="edit">
+			<f:convertDateTime dateStyle="short" timeZone="GMT-3" type="date" pattern="dd/MM/yyyy"/>
+			</h:inputText>
+			
+			<h:outputLabel value="#{msg.titulo}" styleClass="rotulos"/>
+			<h:inputText id="titulo" value="#{publicacaoControlador.publicacao.pub_titulo}" required="true" requiredMessage="#{msg.campoObrigatorio}" size="95" maxlength="100" styleClass="edit" />
+			<h:message for="titulo" styleClass="erro"/>
+			
+			<h:outputLabel value="#{msg.legenda}" styleClass="rotulos"/>
+			<h:inputText id="legenda" value="#{publicacaoControlador.publicacao.pub_legenda}" size="25" maxlength="20" styleClass="edit" />
+					
+			<h:outputLabel value="#{msg.sumario}" styleClass="rotulos"/>
+			<h:inputTextarea id="sumario" rows="20" cols="72" value="#{publicacaoControlador.publicacao.pub_sumario}" required="true" requiredMessage="#{msg.campoObrigatorio}" styleClass="edit"/>
+		    <script type="text/javascript">
+			//<![CDATA[
+			// Replace the <textarea id="editor1"> with an CKEditor instance.
+			var editor1 = CKEDITOR.replace( 'sumario', {
+			extraPlugins : 'autogrow',
+			// kama, office2003, v2
+			skin : 'kama',
+			width : '600',
+			//ckfinder
+			filebrowserBrowseUrl : 		'../ckfinder/ckfinder.html',
+ 			filebrowserImageBrowseUrl : '../ckfinder/ckfinder.html?type=Images',
+ 			filebrowserFlashBrowseUrl : '../ckfinder/ckfinder.html?type=Flash',
+ 			filebrowserUploadUrl : 	    '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+ 			filebrowserImageUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+ 			filebrowserFlashUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
+ 			filebrowserWindowWidth : 	'800',
+ 			filebrowserWindowHeight : 	'600'
+ 			//ckfinder
+			} 
+			);
+			
+			//]]>
+			</script>
+			<h:message for="sumario" styleClass="erro"/>
+			
+			<h:outputLabel for="conteudo" value="#{msg.conteudo}" styleClass="rotulos"/>
+			<h:inputTextarea id="conteudo" rows="40" cols="72" value="#{publicacaoControlador.publicacao.pub_conteudo}" required="true" requiredMessage="#{msg.campoObrigatorio}" styleClass="edit"/>
+		    <script type="text/javascript">
+			//<![CDATA[
+			// Replace the <textarea id="editor1"> with an CKEditor instance.
+			var editor1 = CKEDITOR.replace( 'conteudo', {
+			extraPlugins : 'autogrow',
+			// kama, office2003, v2
+			skin : 'kama',
+			width : '600',
+			//ckfinder
+			filebrowserBrowseUrl : 		'../ckfinder/ckfinder.html',
+ 			filebrowserImageBrowseUrl : '../ckfinder/ckfinder.html?type=Images',
+ 			filebrowserFlashBrowseUrl : '../ckfinder/ckfinder.html?type=Flash',
+ 			filebrowserUploadUrl : 	    '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+ 			filebrowserImageUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+ 			filebrowserFlashUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
+ 			filebrowserWindowWidth : 	'800',
+ 			filebrowserWindowHeight : 	'600'
+ 			//ckfinder
+			} );
+			//]]>
+			</script>
+		    <h:message for="conteudo" styleClass="erro"/>
+			
+			<h:outputLabel value="#{msg.autor}" styleClass="rotulos"/>
+			<h:inputText id="autor" value="#{publicacaoControlador.publicacao.pub_autor}" required="true" requiredMessage="#{msg.campoObrigatorio}" size="25" maxlength="50" styleClass="edit" />
+			<h:message for="autor" styleClass="erro"/>	
+						
+			<h:outputLabel value="#{msg.fonte}" styleClass="rotulos"/>
+			<h:inputText id="fonte" value="#{publicacaoControlador.publicacao.pub_fonte}" size="95" maxlength="250" styleClass="edit"/>
+			
+			<h:outputLabel for="status" value="#{msg.estadoPublicacao}" styleClass="rotulos"/>
+			<h:selectOneMenu id="status" value="#{publicacaoControlador.publicacao.pub_status}" required="true" requiredMessage="#{msg.campoObrigatorio}" onchange="#{publicacaoControlador.publicacao.pub_status}" styleClass="edit">
+				<f:selectItem itemValue="" itemLabel="#{msg.selecione}" /> 
+				<f:selectItems value="#{publicacaoControlador.status}"/>	
+			</h:selectOneMenu>
+			<h:message for="status" styleClass="erro"/>
+			
+			<h:outputLabel value="#{msg.imagem}" styleClass="rotulos"/>
+
+ 			<p:graphicImage id="imagem" value="#{publicacaoControlador.imagem}" style="border:none" cache="false"/> 
+ 			<h:message for="imagem" styleClass="erro"/>
+ 			
+ 			<h:outputText id="arquivo" value="#{publicacaoControlador.nomeImgSelecionada}" style="font-size:8pt;" escape="false"/>
+ 			
+ 			<h:panelGroup rendered="#{publicacaoControlador.publicacao.pub_img_nome ne null}">
+ 			<h:commandButton id="remove" value="#{msg.remover}" action="#{publicacaoControlador.removeImagem}" immediate="true" styleClass="botoes"/>
+ 			</h:panelGroup>
+ 			
+ 			<h:outputLabel value="#{msg.imagemDescricao}" styleClass="rotulos"/>
+			<h:inputText id="imagemDesc" value="#{publicacaoControlador.publicacao.pub_img_descricao}" readonly="#{empty publicacaoControlador.publicacao.pub_img_mime or publicacaoControlador.nomeImgSelecionada}" size="50" maxlength="150" styleClass="edit"/>
+
+			<h:outputLabel value="#{msg.upload}" styleClass="rotulos"/>
+			<p:fileUpload id="upload" sizeLimit="3145728" auto="true" widgetVar="uploader" label="#{msg.procurar}" fileUploadListener="#{publicacaoControlador.handleFileUpload}" allowTypes="*.jpg;*.png;*.gif;*.bmp;" description="Arquivos de Imagens *.jpeg,*.png,*.gif,*.bmp" update="imagem,arquivo,imagemDesc" multiple="false" customUI="true"/>
+
+		</h:panelGrid> 
+		<h:panelGrid columns="3">
+			<h:commandButton id="salvar" value="#{msg.salvar}" action="#{publicacaoControlador.salvar}" styleClass="botoes"/>	
+			<h:commandButton id="cancelar" value="#{msg.cancelar}" action="#{publicacaoControlador.cancela}" immediate="true" styleClass="botoes"/>
+		</h:panelGrid>
+		
+		</fieldset>
+
+	</ui:define>
+
+</ui:decorate>
+</h:body>
+</html>

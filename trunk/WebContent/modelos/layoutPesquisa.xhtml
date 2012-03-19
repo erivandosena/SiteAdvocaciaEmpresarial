@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+		<div id="pesquisa">
+			<!-- visualização de PESQUISA para as páginas -->
+			<h:panelGroup rendered="#{siteControlador.detalhes eq null}"> 
+			<h:inputText value="#{siteControlador.pesquisa}" /> 
+			<h:commandButton value="#{msg.ir}" action="pesquisado" styleClass="button" />
+			</h:panelGroup>
+		
+			<!-- visualização de TITULO da página de conteudo -->
+			<h:panelGroup rendered="#{siteControlador.detalhes.pag_cod gt 0}"> 
+			<p class="titulo"><h:outputText value="#{siteControlador.detalhes.pag_titulo}" styleClass="text"/></p>
+			</h:panelGroup>
+		</div>
+	
+</ui:composition>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<ui:composition template="/modelos/layoutPrincipal.xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml">
+	
+	<ui:define name="tituloJanela">#{siteControlador.webinfo.web_titulo}<h:outputText rendered="#{!empty siteControlador.detalhes.pag_titulo}" value=" &#149; #{siteControlador.detalhes.pag_titulo}"/></ui:define>
+
+	<ui:define name="mainContent">
+
+  		<h:outputText value="#{siteControlador.detalhes.pag_conteudo}" escape="false"/>
+  		<br />
+  		<h:outputText value="#{siteControlador.detalhes.pag_extra}" escape="false"/>
+
+  	<h:panelGroup rendered="#{siteControlador.detalhes eq null}">	
+		<ui:include src="/modelos/layoutConteudo.xhtml" />
+    </h:panelGroup>
+  	
+  	</ui:define>
+	
+</ui:composition>

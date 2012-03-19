@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<!-- Responsável pela gestao das entidades  -->
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="amexempresarial" />
+	</bean>
+	
+	<!-- Identifica os beans anotados com @Service, @Repository, @Controller  -->
+	<context:component-scan base-package="br.net.rwd" />
+
+	<!-- Habilita a configuracao de beans via anotacoes
+	sem a necessidade de usar PersistenceAnnotationBeanPostProcessor,
+	AutowiredAnnotationBeanPostProcessor e etc -->
+	<context:annotation-config />
+	
+	<!-- Classe responsável pela gestão das transacoes  -->
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	
+	<!-- Marcação de transações através de anotações  -->
+	<tx:annotation-driven />		
+
+	<!-- Declaração de Beans no Spring substituido por 
+	@Component("usuarioDao") ... etc nas classes UsuarioDaoImpl ..etc
+	-->
+	
+	<!-- Envio de E-mail -->
+	<bean id="enviarEmail" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="mail.amexempresarial.com.br"/>
+		<property name="username" value="amex@amexempresarial.com.br"/>
+		<property name="password" value="empresarial"/>
+	</bean>
+	
+</beans>

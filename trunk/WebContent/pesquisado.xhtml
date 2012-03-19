@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<ui:composition template="/modelos/layoutPrincipal.xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml">
+	
+	<ui:define name="tituloJanela">#{siteControlador.webinfo.web_titulo} &#149; #{msg.pesquisa}<h:outputText rendered="#{!empty siteControlador.pesquisa}" value=" &#149; #{siteControlador.pesquisa}"/></ui:define>
+
+	<ui:define name="mainContent">
+	
+		<h:outputText value="#{msg.nenhumResultadoPesquisa} #{siteControlador.pesquisa}" rendered="#{siteControlador.pesqPagina.rowCount == 0 and siteControlador.pesqPublicacao.rowCount == 0}" styleClass="erro"/>
+		<h:outputText value="#{msg.encontrado} #{siteControlador.pesqPagina.rowCount+siteControlador.pesqPublicacao.rowCount} #{msg.resultadoReferente} #{siteControlador.pesquisa}" rendered="#{siteControlador.pesqPagina.rowCount > 0 or siteControlador.pesqPublicacao.rowCount > 0}" styleClass="aviso"/> 
+		<br />
+
+		<ui:repeat value="#{siteControlador.pesqPagina}" var="item">
+		<div class="tituloResultPesq">
+			<h:outputLink value="conteudoPag.jsf?c=#{item.pag_cod}" style="color:#B38800;">
+			<h:outputText value="#{item.pag_titulo}"/>
+			</h:outputLink> 
+		</div>
+			<div class="delimitador">
+				<h:outputText value="#{item.pag_conteudo}" escape="false"/>	
+			</div>
+		</ui:repeat>
+		
+		<ui:repeat value="#{siteControlador.pesqPublicacao}" var="item">
+		<div class="tituloResultPesq">
+			<h:outputLink  value="conteudoPub.jsf?p=#{item.pub_cod}" style="color:#B38800;">
+			<h:outputText value="#{item.pub_titulo}"/>
+			</h:outputLink> 
+		</div>
+			<div class="delimitador">
+				<h:outputText value="#{item.pub_conteudo}" escape="false"/>
+			</div>
+		</ui:repeat>
+	</ui:define>
+
+</ui:composition>

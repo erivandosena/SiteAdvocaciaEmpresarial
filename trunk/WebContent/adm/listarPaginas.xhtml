@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<ui:composition template="/adm/modelosAdm/layoutPrincipalAdm.xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml">
+
+	<ui:define name="tituloJanela">#{msg.administrador} &#45; #{msg.paginas}</ui:define>
+
+	<ui:define name="mainContentAdm">
+
+		<fieldset>
+		<legend>#{msg.listaCadastros} &#8226; #{msg.paginas}</legend>
+
+		<h:dataTable id="paginas" value="#{paginaControlador.todos}" var="item" columnClasses=", , ,colunaDireita,colunaEsquerda" 
+		headerClass="cabecalho" rowClasses="celulaSuperior, celulaInferior" styleClass="tabela"> 	
+
+		<h:column>
+			<f:facet name="header">#{msg.titulo}</f:facet>
+			<h:outputText id="titulo" value="#{item.pag_titulo}" />
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">#{msg.legenda}</f:facet>
+			<h:outputText id="legenda" value="#{item.pag_legenda}"/>
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">#{msg.menu}</f:facet>
+			<h:panelGroup rendered="#{item.pag_posicao == 'T'}">#{msg.topo}</h:panelGroup>
+			<h:panelGroup rendered="#{item.pag_posicao == 'R'}">#{msg.rodape}</h:panelGroup>
+			<h:panelGroup rendered="#{item.pag_posicao == 'D'}">#{msg.destaque}</h:panelGroup>
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">#{msg.edicao}</f:facet>
+			<h:commandLink value="#{msg.atualizar}" action="#{paginaControlador.editar}">
+			<f:setPropertyActionListener target="#{paginaControlador.pagina}" value="#{item}"/>
+			</h:commandLink>
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">#{msg.baixa}</f:facet>
+			<h:commandLink id="links" value="#{msg.excluir}" action="#{paginaControlador.excluir}" onclick="javascript:if (!confirm('#{msg.mensagemPergunta}')) return false;">
+			<f:setPropertyActionListener target="#{paginaControlador.pagina}" value="#{item}"/>
+			</h:commandLink>
+		</h:column>
+			
+		</h:dataTable>
+
+		<h:panelGrid columns="2">
+		<h:commandButton id="novo" value="#{msg.novo}" action="#{paginaControlador.novaPag}" immediate="true" styleClass="botoes"/>
+		<h:messages infoClass="aviso" warnClass="advertencia" errorClass="erro" />
+		</h:panelGrid>
+
+		</fieldset>
+
+	</ui:define>
+
+</ui:composition>
