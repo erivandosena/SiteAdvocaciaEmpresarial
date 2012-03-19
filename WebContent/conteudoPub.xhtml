@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.prime.com.tr/ui"
+	xml:lang="pt-br">
+	
+<h:head>
+
+<title>#{siteControlador.webinfo.web_titulo}<h:outputText rendered="#{!empty siteControlador.publicacao.pub_titulo}" value=" &#149; #{siteControlador.publicacao.pub_titulo}"/></title>
+<meta name="description" content="AMEX Advocacia e assessoria empresarial e do consumidor. #{siteControlador.publicacao.pub_titulo}" />
+<meta name="keywords" content="advocacia,assessoria,empresarial,consultoria,advogado,juridico,civel,familia,sucessoes,bancaria,fiscal,crimes financeiros,cobrancas,imobiliario, autor#{siteControlador.publicacao.pub_cod} #{siteControlador.publicacao.pub_autor}" />
+
+<link rel="shortcut icon" type="image/x-icon" href="#{facesContext.externalContext.request.contextPath}/favicon.ico" />
+<link rel="icon" type="image/gif" href="#{facesContext.externalContext.request.contextPath}/animated_favicon1.gif" />
+
+</h:head>
+
+<h:body>
+<h:outputScript library="javascript" name="aumDimLetra.js" target="head"/>
+
+<ui:decorate template="/modelos/decoradorPrincipal.xhtml">
+
+	<ui:define name="mainContent">
+	
+		<h:panelGroup rendered="#{siteControlador.publicacao ne null}">
+			
+			<h:panelGroup rendered="#{siteControlador.publicacao.pub_legenda ne null}">
+				<h:outputText value="#{siteControlador.publicacao.pub_legenda}&#160;" styleClass="legendaPub"/>
+			</h:panelGroup>
+	
+			<h:outputText value="#{siteControlador.publicacao.pub_titulo}" styleClass="tituloPub"/>
+	
+			<h:outputText value="#{msg.por} #{siteControlador.publicacao.pub_autor}" styleClass="porPub"/>
+
+			<h:panelGroup rendered="#{siteControlador.publicacao.pub_data ne null}" styleClass="dataPub">
+				<h:outputText value="#{msg.dataPublicado} "/>
+				<h:outputText value="#{siteControlador.publicacao.pub_data}">
+					<f:convertDateTime type="date" dateStyle="full" timeZone="GMT-3" locale="pt_BR" pattern="EEEEEEEEEEEEE, dd 'de' MMMM 'de' yyyy"/>
+				</h:outputText>
+			</h:panelGroup>
+	
+			<h:panelGroup rendered="#{siteControlador.publicacao.pub_dataalteracao ne null}" styleClass="dataAltPub">
+				<h:outputText value="#{msg.dataAtualizado} "/>
+				<h:outputText value="#{siteControlador.publicacao.pub_dataalteracao}">
+					<f:convertDateTime type="date" dateStyle="full" timeZone="GMT-3" locale="pt_BR" pattern="EEEEEEEEEEEEE, dd 'de' MMMM 'de' yyyy"/>
+				</h:outputText>
+			</h:panelGroup>
+			<div id="texto">
+			<div id="publicacao">
+				<div id="pubEsquredo">
+					<h:outputText value="#{siteControlador.publicacao.pub_sumario}" escape="false"/>
+					<br />
+					<h:panelGroup rendered="#{siteControlador.publicacao.pub_img_nome ne null}">
+					<div class="imgPub">
+						<p:graphicImage id="img" value="/ckfinder/userfiles/images/#{siteControlador.publicacao.pub_img_nome}" cache="false" style="border: none;"/>
+						<h:outputText value="#{siteControlador.publicacao.pub_img_descricao}" styleClass="legendaImg"/>
+					</div>
+					</h:panelGroup>
+				</div>
+				<div id="pubDireito">
+					<ul class="tamanhosLetras">
+						<li class="diminuiLetra"><h:outputLink value="javascript:mudaTamanho('texto',-1,0);" title="#{msg.diminuirTamanho}"/></li>
+						<li class="normalizaLetra"><h:outputLink value="javascript:mudaTamanho('texto',0,1);" title="#{msg.normalizarTamanho}"/></li>
+						<li class="aumentaLetra"><h:outputLink value="javascript:mudaTamanho('texto',1,0);" title="#{msg.aumentarTamanho}"/></li>
+					</ul>
+					
+					<h:outputLink value="http://www.facebook.com/sharer.php?u=#{request.requestURL}?p=#{param['p']}" target="_blank" title="#{msg.comFacebook}">
+					<h:graphicImage value="#{resource['img:facebook.png']}" styleClass="imgPubOpcoes" alt="" />
+					</h:outputLink>
+					
+					<h:outputLink value="http://twitter.com/share?url=#{request.requestURL}?p=#{param['p']}" target="_blank" title="#{msg.comTwitter}">
+					<h:graphicImage value="#{resource['img:twitter.png']}" styleClass="imgPubOpcoes" alt="" />
+					</h:outputLink>
+
+					<h:commandButton image="#{resource['img:impressora.png']}"
+					action="#{siteControlador.executarRelatorio}"
+					onclick="this.form.target='_blank'" alt="" title="#{msg.imprimir}">
+					<f:param name="p" value="#{param['p']}" />
+					</h:commandButton>
+					 
+				</div>
+			</div>
+			<div id="divisor" style="width:100%;clear:both;">
+		
+			</div>
+				<h:outputText value="#{siteControlador.publicacao.pub_conteudo}" escape="false"/>
+			</div>
+			
+			<br />
+			<h:panelGroup rendered="#{siteControlador.publicacao.pub_fonte ne ''}" styleClass="fontePub">
+				#{msg.fonte} <h:outputLink value="#{siteControlador.publicacao.pub_fonte}" target="_blank" title="#{msg.cliqueAqui}">#{siteControlador.publicacao.pub_fonte}</h:outputLink>
+			</h:panelGroup>
+			
+			<br />
+			<h:outputText value="#{msg.totalExibido} #{siteControlador.contador}" styleClass="fontePub"/>
+			
+			<div id="pdf">
+				<h:outputLink value="http://get.adobe.com/br/reader/" target="_blank" title="#{msg.cliqueAqui}">
+					<h:graphicImage value="#{resource['img:get_adobe_reader.gif']}" style="border:none" alt="" />
+				</h:outputLink>
+				<br />
+				#{msg.pluginAdobe}
+			</div>
+			
+		</h:panelGroup>
+  		
+		<h:panelGroup rendered="#{siteControlador.publicacao eq null}">	
+			<ui:include src="/modelos/layoutConteudo.xhtml" />
+    	</h:panelGroup>
+    
+  	</ui:define>
+	
+</ui:decorate>
+</h:body>
+</html>

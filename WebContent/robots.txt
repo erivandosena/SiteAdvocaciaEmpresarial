@@ -1,0 +1,43 @@
+User-agent: *
+Allow: /
+
+User-agent: Mediapartners-Google
+Allow: /
+
+User-agent: Adsbot-Google
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Googlebot-Mobile
+Allow: /
+
+User-agent: ia_archiver-web.archive.org
+Disallow: /
+
+Disallow: /adm/
+Disallow: /ckeditor/
+Disallow: /ckfinder/
+Disallow: /images/
+Disallow: /logs/
+Disallow: /META-INF/
+Disallow: /modelos/
+Disallow: /resources/
+Disallow: /WEB-INF/
+Disallow: /index.php
+Disallow: /README
+Disallow: /400.jsf
+Disallow: /403.jsf
+Disallow: /404.jsf
+Disallow: /expirou.jsf
+Disallow: /adm/inicial.jsf
+Disallow: /animated_favicon1.gif
+Disallow: /docs/
+Disallow: /examples/
+Disallow: /host-manager/
+Disallow: /manager/
+Disallow: /ROOT_OLD/
+
+# Arquivos Sitemap
+Sitemap: http://www.amexempresarial.com.br/sitemap.xml

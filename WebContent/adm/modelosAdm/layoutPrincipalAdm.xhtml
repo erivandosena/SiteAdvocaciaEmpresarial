@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xml:lang="pt-br">
+
+<h:head>
+	<title><ui:insert name="tituloJanela" /></title>
+	<meta name="robots" content="noindex,nofollow" />
+	<link rel="shortcut icon" type="image/x-icon" href="#{facesContext.externalContext.request.contextPath}/favicon.ico" />
+    <link rel="icon" type="image/gif" href="#{facesContext.externalContext.request.contextPath}/animated_favicon1.gif" />
+</h:head>
+
+<h:body>
+    <h:outputStylesheet library="css" name="style.css" target="body" />
+    
+    <h:form id="formAdm" prependId="false">
+
+	<div id="conteinerTopo"></div>
+	<div id="conteinerConteudo">
+	
+		<!-- Inicio itens superiores -->
+		<div id="headerAdm">
+			<ui:insert name="headerAdm">
+				<ui:include src="/adm/modelosAdm/layoutTopoAdm.xhtml" />
+			</ui:insert> 
+		</div>
+		<!-- Final itens superiores -->
+		<!-- Inicio conteudos -->
+		
+		<div id="mainContentAdm">
+			<ui:insert name="mainContentAdm">
+				
+			</ui:insert> 
+		</div>
+		<!-- Final conteudos -->
+		
+	</div>
+	
+	<div id="conteinerRodape">
+	
+		<!-- Inicio itens ropade -->
+		<div id="footer">
+			<ui:insert name="footer">
+				<ui:include src="/adm/modelosAdm/layoutRodapeAdm.xhtml" />
+			</ui:insert> 
+		</div>
+		<!-- Final itens ropade -->
+		
+	</div>
+
+	</h:form>
+	
+</h:body>
+
+</html>

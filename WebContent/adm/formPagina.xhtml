@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xml:lang="pt-br">
+	
+<h:head>
+	<title>#{msg.administrador} &#45; #{msg.paginas}</title>
+	<link rel="shortcut icon" type="image/x-icon" href="#{facesContext.externalContext.request.contextPath}/favicon.ico" />
+    <link rel="icon" type="image/gif" href="#{facesContext.externalContext.request.contextPath}/animated_favicon1.gif" />
+
+	<script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
+</h:head>
+
+<h:body>
+
+<ui:decorate template="/adm/modelosAdm/decoradorPrincipalAdm.xhtml">
+
+	<ui:define name="mainContentAdm">
+
+		<fieldset>
+		<legend>#{msg.formularioCadastro} &#8226; #{msg.paginas}</legend>
+
+		<h:panelGrid columns="1">
+			<h:outputLabel for="codigo" value="#{msg.codigo}" rendered="#{!empty paginaControlador.pagina.pag_cod}" styleClass="rotulos"/>
+			<h:inputText id="codigo" value="#{paginaControlador.pagina.pag_cod}" rendered="#{!empty paginaControlador.pagina.pag_cod}" 
+			readonly="#{!empty paginaControlador.pagina.pag_cod}" styleClass="edit" />
+			
+			<h:outputLabel for="titulo" value="#{msg.titulo}" styleClass="rotulos"/>
+			<h:inputText id="titulo" value="#{paginaControlador.pagina.pag_titulo}" required="true" maxlength="25" requiredMessage="#{msg.campoObrigatorio}" size="20" styleClass="edit" />
+			<h:message for="titulo" styleClass="erro"/>
+			
+			<h:outputLabel for="legenda" value="#{msg.legenda}" styleClass="rotulos"/>
+			<h:inputText id="legenda" value="#{paginaControlador.pagina.pag_legenda}" size="40" maxlength="100" styleClass="edit"/>
+						
+			<h:outputLabel for="conteudo" value="#{msg.conteudo}" styleClass="rotulos"/>
+			<h:inputTextarea id="conteudo" rows="40" cols="72" value="#{paginaControlador.pagina.pag_conteudo}" required="true" requiredMessage="#{msg.campoObrigatorio}" styleClass="edit"/>
+		    <script type="text/javascript">
+			//<![CDATA[
+			// Replace the <textarea id="editor1"> with an CKEditor instance.
+			var editor1 = CKEDITOR.replace( 'conteudo', {
+			extraPlugins : 'autogrow',
+			// kama, office2003, v2
+			skin : 'kama',
+			width : '600',
+			//ckfinder
+			filebrowserBrowseUrl : 		'../ckfinder/ckfinder.html',
+ 			filebrowserImageBrowseUrl : '../ckfinder/ckfinder.html?type=Images',
+ 			filebrowserFlashBrowseUrl : '../ckfinder/ckfinder.html?type=Flash',
+ 			filebrowserUploadUrl : 	    '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+ 			filebrowserImageUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+ 			filebrowserFlashUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
+ 			filebrowserWindowWidth : 	'800',
+ 			filebrowserWindowHeight : 	'600'
+ 			//ckfinder
+			} );
+			//]]>
+			</script>
+		    <h:message for="conteudo" styleClass="erro"/>
+			
+			<h:outputLabel for="extra" value="#{msg.extra}" styleClass="rotulos"/>
+			<h:inputTextarea id="extra" rows="6" cols="72" value="#{paginaControlador.pagina.pag_extra}" styleClass="edit"/>
+			<script type="text/javascript">
+			//<![CDATA[
+			// Replace the <textarea id="editor1"> with an CKEditor instance.
+			var editor2 = CKEDITOR.replace( 'extra', {
+			extraPlugins : 'autogrow',
+			// kama, office2003, v2
+			skin : 'kama',
+			width : '600',
+			//ckfinder
+			filebrowserBrowseUrl : 		'../ckfinder/ckfinder.html',
+ 			filebrowserImageBrowseUrl : '../ckfinder/ckfinder.html?type=Images',
+ 			filebrowserFlashBrowseUrl : '../ckfinder/ckfinder.html?type=Flash',
+ 			filebrowserUploadUrl : 	    '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+ 			filebrowserImageUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+ 			filebrowserFlashUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
+ 			filebrowserWindowWidth : 	'800',
+ 			filebrowserWindowHeight : 	'600'
+ 			//ckfinder
+			} );
+			//]]>
+			</script>
+						
+			<h:outputLabel for="posicao" value="#{msg.menu}" styleClass="rotulos"/>
+			<h:selectOneMenu id="posicao" value="#{paginaControlador.pagina.pag_posicao}" required="true" requiredMessage="#{msg.campoObrigatorio}" 
+			onchange="#{paginaControlador.pagina.pag_posicao}" styleClass="edit">
+				<f:selectItem itemValue="" itemLabel="#{msg.selecione}" /> 
+				<f:selectItems value="#{paginaControlador.posicoes}"/>	
+			</h:selectOneMenu>
+			<h:message for="posicao" styleClass="erro"/>
+			
+		</h:panelGrid> 
+		<h:panelGrid columns="3">
+			<h:commandButton value="#{msg.salvar}" action="#{paginaControlador.salvar}" styleClass="botoes"/>
+			<h:commandButton value="#{msg.cancelar}" action="listarPaginas" immediate="true" styleClass="botoes"/>	
+		</h:panelGrid>
+		
+		</fieldset>
+
+	</ui:define>
+
+</ui:decorate>
+</h:body>
+</html>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<ui:composition template="/adm/modelosAdm/layoutPrincipalAdm.xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml">
+
+	<ui:define name="tituloJanela">#{msg.administrador} &#45; #{msg.cadastro}</ui:define>
+
+	<ui:define name="mainContentAdm">
+
+		<fieldset>
+		<legend>#{msg.cadastro}</legend>
+
+		<h:dataTable value="#{websiteControlador.todos}" var="item" columnClasses="colunaDireita,colunaEsquerda" 
+		headerClass="cabecalho" rowClasses="celulaSuperior, celulaInferior" styleClass="tabela">
+		
+		<h:column>
+			<f:facet name="header">#{msg.edicao}</f:facet>
+			<h:panelGroup rendered="#{!empty item.web_cod}">
+				<h:commandLink value="#{item.web_titulo} #{item.web_slogan}" action="#{websiteControlador.editar}">
+				<f:setPropertyActionListener target="#{websiteControlador.website}" value="#{item}"/>
+				</h:commandLink>
+			</h:panelGroup>
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">#{msg.baixa}</f:facet>
+			<h:commandLink id="links" value="#{msg.excluir}" action="#{websiteControlador.excluir}" onclick="javascript:if (!confirm('#{msg.mensagemPergunta}')) return false;">
+			<f:setPropertyActionListener target="#{websiteControlador.website}" value="#{item}"/>
+			</h:commandLink>
+		</h:column>
+		
+		</h:dataTable>
+
+		<h:panelGrid columns="2">
+		<h:panelGroup rendered="#{!websiteControlador.cadastrado}">
+			<h:commandButton value="#{msg.novo}" action="#{websiteControlador.novoWeb}" immediate="true" styleClass="botoes"/>
+		</h:panelGroup>
+		<h:messages infoClass="aviso" warnClass="advertencia" errorClass="erro" />
+		</h:panelGrid>
+
+		</fieldset>
+
+	</ui:define>
+
+</ui:composition>

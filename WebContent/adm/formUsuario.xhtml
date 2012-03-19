@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<ui:composition template="/adm/modelosAdm/layoutPrincipalAdm.xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml">
+	
+	<ui:define name="tituloJanela">#{msg.administrador} &#45; #{msg.usuarios}</ui:define>
+
+	<ui:define name="mainContentAdm">
+
+		<fieldset>
+		<legend>#{msg.formularioCadastro} &#8226; #{msg.usuarios}</legend>
+		
+		<div id="estruturaDireita">
+			<h:messages showSummary="#{true}" infoClass="aviso" warnClass="advertencia" errorClass="erro" />
+		</div>
+		
+		<h:panelGrid columns="2">
+			<h:outputLabel for="codigo" value="#{msg.codigo}" rendered="#{!empty usuarioControlador.usuario.usu_cod}" styleClass="rotulos"/>
+			<h:inputText id="codigo" value="#{usuarioControlador.usuario.usu_cod}" rendered="#{!empty usuarioControlador.usuario.usu_cod}" readonly="#{!empty usuarioControlador.usuario.usu_cod}" styleClass="edit"/>
+			
+			<h:outputLabel for="nome" value="#{msg.nome}" styleClass="rotulos"/>
+			<h:inputText id="nome" value="#{usuarioControlador.usuario.usu_nome}" size="60" maxlength="50" required="true" requiredMessage="#{msg.nome} &#62;&#62; #{msg.campoObrigatorio}" styleClass="edit">
+			</h:inputText>
+			
+			<h:outputLabel for="email" value="#{msg.email}" styleClass="rotulos"/>
+			<h:inputText id="email" value="#{usuarioControlador.usuario.usu_email}" validator="#{uteis.validaEmail}" size="25" maxlength="100" required="true" requiredMessage="#{msg.email} &#62;&#62; #{msg.campoObrigatorio}" styleClass="edit"/>
+			
+			<h:outputLabel for="senha" value="#{msg.senha}" styleClass="rotulos"/>
+			<h:inputSecret id="senha" value="#{usuarioControlador.usuario.usu_senha}" size="15" maxlength="25" required="true" requiredMessage="#{msg.senha} &#62;&#62; #{msg.campoObrigatorio}" styleClass="edit"/>
+			
+			<h:outputLabel for="perfil" value="#{msg.perfil}" styleClass="rotulos"/>
+			<h:selectOneMenu id="perfil" value="#{usuarioControlador.usuario.usu_perfil}" disabled="#{usuarioControlador.usuarioSessao == 'U'}" required="true" requiredMessage="#{msg.perfil} &#62;&#62; #{msg.campoObrigatorio}" styleClass="edit">
+				<f:selectItem itemValue="" itemLabel="#{msg.selecione}" /> 
+				<f:selectItems value="#{usuarioControlador.perfis}"/>	
+			</h:selectOneMenu>
+			
+			<h:outputLabel for="endereco" value="#{msg.endereco}" styleClass="rotulos"/>
+			<h:inputText id="endereco" value="#{usuarioControlador.usuario.usu_endereco}" size="60" maxlength="100" styleClass="edit"/>
+			
+			<h:outputLabel for="numero" value="#{msg.numero}" styleClass="rotulos"/>
+			<h:inputText id="numero" value="#{usuarioControlador.usuario.usu_numero}" size="5" maxlength="10" styleClass="edit"/>
+			
+			<h:outputLabel for="cep" value="#{msg.cep}" styleClass="rotulos"/>
+			<h:inputText id="cep" value="#{usuarioControlador.usuario.usu_cep}" size="10" maxlength="10" styleClass="edit"/>
+			
+			<h:outputLabel for="estado" value="#{msg.estado}" styleClass="rotulos"/>
+			<h:selectOneMenu id="estado" value="#{usuarioControlador.usuario.usu_estado}" onchange="submit()" valueChangeListener="#{usuarioControlador.retornaUf}" styleClass="edit">
+				<f:selectItem itemValue="" itemLabel="#{msg.selecione}" /> 
+				<f:selectItems value="#{ufEstados.estados}" />
+			</h:selectOneMenu> 
+			
+			<h:outputLabel for="cidade" value="#{msg.cidade}" styleClass="rotulos"/>
+			<h:selectOneMenu id="cidade" value="#{usuarioControlador.usuario.usu_cidade}" styleClass="edit">
+				<f:selectItem itemValue="" itemLabel="#{msg.selecione}" /> 
+				<f:selectItems value="#{usuarioControlador.cidades}" />	
+			</h:selectOneMenu>
+		</h:panelGrid> 
+		
+		<h:panelGrid columns="2">
+			<h:commandButton value="#{msg.salvar}" action="#{usuarioControlador.salvar}" styleClass="botoes"/>
+			<h:commandButton value="#{msg.cancelar}" action="listarUsuarios" immediate="true" styleClass="botoes"/>
+		</h:panelGrid>
+		
+		</fieldset>
+
+	</ui:define>
+
+</ui:composition>

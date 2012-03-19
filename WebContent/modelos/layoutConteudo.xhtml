@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+		<!-- Inicio conteudo superior -->
+		<div id="mainContentHeader">
+		
+		<!-- início insert conteúdo -->
+		<ui:insert name="mainContentHeader">
+		<div id="colunaInicialEsquerda">
+		<h:outputText value="#{siteControlador.webinfo.web_descricao}" escape="false"/>
+		</div>
+		
+		<div id="colunaInicialDireita">
+		<div id="services">
+		<p class="largeone">#{msg.consultaProcessual}</p>
+		<h:outputLabel for="numero" value="#{msg.numeroUnico}" styleClass=""/>
+		<h:outputLabel for="recurso" value="#{msg.recurso}" styleClass="espacoLabRecurso"/><br />
+		<h:inputText id="numero" value="#{siteControlador.numero}" size="21" />
+		<h:inputText id="recurso" value="#{siteControlador.recurso}" size="4" styleClass="espacoEdtRecurso" />
+		<h:commandButton value="" action="consultado" styleClass="botConsulta" />
+		<br />
+		<h:outputLabel for="nome" value="#{msg.nomeCompletoParte}" styleClass=""/><br />
+		<h:inputText id="nome" value="#{siteControlador.nome}" size="30" />
+		<h:commandButton value="" action="consultado" styleClass="botConsulta" />
+		<br /><br />
+		<h:outputText id="obs" value="#{msg.obsCivel}"/>
+		</div>
+		
+		</div>
+		<p class="border"></p>
+		</ui:insert>
+		<!-- final insert conteúdo -->
+		
+		</div>
+		<!-- Final conteudo superior -->
+		
+		<!-- Inicio coluna esquerda -->
+		<div id="leftPan">
+		
+		<h:panelGroup rendered="#{not empty siteControlador.ultimaPub}">
+		<h2>#{msg.publicacaoRecente}</h2>
+		<p class="redtext">
+    		<h:outputLink value="#{facesContext.externalContext.request.contextPath}/conteudoPub.jsf?p=#{siteControlador.ultimaPub.pub_cod}" title="#{msg.cliqueAqui}" style="color: #D20039;">
+    			#{siteControlador.ultimaPub.pub_titulo}
+    		</h:outputLink>
+    	</p>
+    	<h:panelGroup rendered="#{siteControlador.ultimaPub.pub_img_nome ne null}">
+			<p:graphicImage id="img_p" value="/ckfinder/userfiles/images/#{siteControlador.ultimaPub.pub_img_nome}" title="#{siteControlador.ultimaPub.pub_legenda}" cache="false" style="width:auto;height:120px;width:auto;border:none;float:left;margin:0 5px 0 0;"/>
+		</h:panelGroup>
+		
+		<div style="text-align: justify;">
+			<h:outputText value="#{siteControlador.ultimaPub.pub_sumario}" escape="false" />
+		</div>
+
+		<p class="more">
+			<h:outputLink value="#{facesContext.externalContext.request.contextPath}/conteudoPub.jsf?p=#{siteControlador.ultimaPub.pub_cod}" title="#{msg.cliqueAqui}">
+				#{msg.leiaMais}
+			</h:outputLink>
+		</p>
+		</h:panelGroup>
+
+		</div>
+		<!-- Final coluna esquerda -->
+		
+		<!-- Inicio coluna direita -->
+		<div id="rightPan">
+		<h:panelGroup rendered="#{siteControlador.paginaDestaque ne null}">
+		<h3>#{msg.destaque}</h3>
+		<ul>
+			<ui:repeat value="#{siteControlador.paginaDestaque}" var="campo">
+			<li><h:outputLink value="conteudoPag.jsf?c=#{campo.pag_cod}" title="#{campo.pag_legenda}">#{campo.pag_titulo}</h:outputLink></li>
+			</ui:repeat>
+		</ul>
+		</h:panelGroup>
+		
+		<h:panelGroup rendered="#{siteControlador.links ne null}">
+		<h2>#{msg.linksUteis}</h2>
+		<ul class="nextone">
+			<ui:repeat value="#{siteControlador.links}" var="campo">
+			<li><h:outputLink value="#{campo.lin_url}" title="#{campo.lin_nome}">#{campo.lin_nome}</h:outputLink></li>
+			</ui:repeat>
+		</ul>
+		</h:panelGroup>
+		</div>
+		<!-- Final coluna direita -->
+		
+</ui:composition>

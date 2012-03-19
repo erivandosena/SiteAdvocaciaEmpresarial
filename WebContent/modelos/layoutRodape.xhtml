@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+		<!-- Inicio menu inferior -->
+		<div id="footerPan">
+    		<ul>
+				<li><h:outputLink value="#{facesContext.externalContext.request.contextPath}/inicial.jsf">
+				#{msg.inicial}</h:outputLink>
+				</li>
+				<h:panelGroup rendered="#{siteControlador.todasPub ne null}">
+				<li> &#8226; <h:outputLink value="#{facesContext.externalContext.request.contextPath}/publicacoes.jsf">
+				#{msg.publicacoes}</h:outputLink>
+				</li>
+				</h:panelGroup>
+      			<ui:repeat value="#{siteControlador.paginaRodape}" var="campo">
+				<li> &#8226; <h:outputLink value="#{facesContext.externalContext.request.contextPath}/conteudoPag.jsf?c=#{campo.pag_cod}" title="#{campo.pag_legenda}">
+				#{campo.pag_titulo}</h:outputLink>
+				</li>
+	  			</ui:repeat>
+	  			<li> &#8226; <h:outputLink value="http://webmail.amexempresarial.com.br/" target="_blank">
+				#{msg.webMail}</h:outputLink>
+				</li>
+	  			<li> &#8226; <h:outputLink value="#{facesContext.externalContext.request.contextPath}/adm/inicial.jsf">
+				#{msg.areaRestrita}</h:outputLink>
+				</li>
+   			</ul>
+    	</div>
+   		<!-- Final menu inferior -->
+   		
+		<!-- Inicio creditos desenvolvedor -->
+		<div id="footerProducao" class="click">
+  			#{msg.produzidoPor} 
+  			<h:outputLink value="#{msg.rwdSite}" title="#{msg.cliqueAqui}">
+  			#{msg.rwd}
+  			</h:outputLink>
+  		</div>
+  		<!-- Final creditos desenvolvedor -->
+  		
+    	<!-- Inicio copyright -->
+ 		<div id="footerlogoPan">
+ 	    	<h:outputLink value="#{facesContext.externalContext.request.contextPath}/inicial.jsf" title="#{msg.cliqueAqui}">
+ 	    		<h:graphicImage value="/ckfinder/userfiles/images/img_logomarca.gif" styleClass="imgLogoFooter" alt="#{siteControlador.webinfo.web_titulo}"/>
+ 	    	</h:outputLink>
+    		<p class="copyright"><h:outputText value="&#169; #{uteis.anoAtual} #{siteControlador.webinfo.web_titulo} #{msg.copyright}"/></p>
+ 		</div>
+ 		<!-- Final copyright -->
+ 		
+</ui:composition>

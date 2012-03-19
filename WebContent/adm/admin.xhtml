@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<ui:composition template="/adm/modelosAdm/layoutPrincipalAdm.xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml">
+
+	<ui:define name="tituloJanela">#{msg.administrador} &#45; #{msg.areaAdminSite}</ui:define>
+
+	<ui:define name="headerAdm">
+	<!-- Inicio logomarca e slogan -->
+	<div id="logo">
+		<h:outputLink value="#{facesContext.externalContext.request.contextPath}/inicial.jsf" title="#{msg.cliqueAqui}">
+			<h:graphicImage value="/ckfinder/userfiles/images/img_logo.gif" styleClass="imgLogo" alt="#{siteControlador.webinfo.web_titulo}" />
+		</h:outputLink>
+	</div>
+	<h:outputText value="#{msg.areaAdminSite}" styleClass="logoSlogan" />
+	<!-- Final logomarca e slogan -->
+	<h6>#{msg.acessoRestrito}</h6>
+	</ui:define>
+
+	<ui:define name="mainContentAdm">
+	
+		<div id="loginAdm">
+		
+		<h:panelGrid columns="3">
+		<h:outputLabel for="usuario" value="#{msg.usuario} " /> 
+		<h:inputText id="usuario" styleClass="campo" value="#{administradorControlador.admin.usu_email}" required="true" requiredMessage="#{msg.usuarioObrigatorio}" /> 
+		<h:message styleClass="erro" for="usuario"/>
+		
+		<h:outputLabel for="senha" value="#{msg.senha} " /> 
+		<h:inputSecret id="senha" styleClass="campo" value="#{administradorControlador.admin.usu_senha}" required="true" requiredMessage="#{msg.senhaObrigatoria}" /> 
+		<h:message for="senha" styleClass="erro" />
+		</h:panelGrid>
+		
+		<h:panelGrid columns="3">
+		<h:commandButton type="submit" action="#{administradorControlador.login}" id="enviar" value="#{msg.entrar}" /> 
+		<h:messages globalOnly="true" infoClass="aviso" warnClass="advertencia" errorClass="erro"/>
+		</h:panelGrid>
+
+		</div>
+	</ui:define>
+
+	<ui:define name="footer">
+	 <!-- Inicio creditos desenvolvedor -->
+	 <div id="footerProducao" class="click">
+  		#{msg.produzidoPor} 
+  		<h:outputLink value="#{msg.rwdSite}" title="#{msg.cliqueAqui}">
+  			#{msg.rwd}
+  		</h:outputLink>
+  	 </div>
+  	 <!-- Final creditos desenvolvedor -->
+     <!-- Inicio copyright -->
+ 	 <div id="footerlogoPan">
+ 		<h:outputLink value="#{facesContext.externalContext.request.contextPath}/inicial.jsf" title="#{msg.cliqueAqui}">
+ 			<h:graphicImage value="/ckfinder/userfiles/images/img_logomarca.gif" styleClass="imgLogoFooter" alt="#{siteControlador.webinfo.web_titulo}"/>
+ 		</h:outputLink>
+    	<p class="copyright">#{msg.areaAdminSite}</p>
+ 	 </div>
+ 	 <!-- Final copyright -->
+	</ui:define>
+
+</ui:composition>

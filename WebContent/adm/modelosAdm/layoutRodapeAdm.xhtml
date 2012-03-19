@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<div id="footerPan">
+ 		<!-- Inicio menu inferior -->
+    	<ul>
+    		<ui:repeat value="#{paginaControlador.todos}" var="pagina">
+     	 	<li>
+     	 	<h:commandLink value="#{pagina.pag_titulo}" action="#{paginaControlador.editar}">
+			<f:setPropertyActionListener target="#{paginaControlador.pagina}" value="#{pagina}"/>
+			</h:commandLink>
+     	 	</li>
+      		</ui:repeat>
+   		</ul>
+   		<!-- Final menu inferior -->
+     </div>
+	 <!-- Inicio creditos desenvolvedor -->
+	 <div id="footerProducao" class="click">
+  		#{msg.produzidoPor} 
+  		<h:outputLink value="#{msg.rwdSite}" title="#{msg.cliqueAqui}">
+  			#{msg.rwd}
+  		</h:outputLink>
+  	 </div>
+  	 <!-- Final creditos desenvolvedor -->
+     <!-- Inicio copyright -->
+ 	 <div id="footerlogoPan">
+ 		<h:outputLink value="../inicial.jsf" title="#{msg.cliqueAqui}">
+ 			<h:graphicImage value="/ckfinder/userfiles/images/img_logomarca.gif" styleClass="imgLogoFooter" alt="#{siteControlador.webinfo.web_titulo}"/>
+ 		</h:outputLink>
+    	<p class="copyright">#{msg.areaAdminSite}</p>
+ 	 </div>
+ 	 <!-- Final copyright -->
+  
+</ui:composition>

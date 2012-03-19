@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<ui:composition template="/modelos/layoutPrincipal.xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml">
+	
+	<ui:define name="tituloJanela">#{siteControlador.webinfo.web_titulo} &#149; #{msg.pesquisa}<h:outputText rendered="#{!empty siteControlador.pesquisa}" value=" &#149; #{siteControlador.pesquisa}"/></ui:define>
+
+	<ui:define name="mainContent">
+	
+	<div align="center">
+	<h:graphicImage value="#{resource['img:carregando.gif']}" width="260" height="80" alt="#{msg.consultando}" />
+	<br /><br />
+	<h:outputLink value="inicial.jsf" styleClass="destaque">#{msg.cancelar}</h:outputLink>
+	</div>
+	<h:outputText value="#{siteControlador.consultaProcessual}" escape="false"/>
+	
+	</ui:define>
+
+</ui:composition>

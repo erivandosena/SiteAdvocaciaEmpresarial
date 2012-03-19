@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<ui:composition template="/adm/modelosAdm/layoutPrincipalAdm.xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml">
+
+	<ui:define name="tituloJanela">#{msg.administrador} &#45; #{msg.usuarios}</ui:define>
+
+	<ui:define name="mainContentAdm">
+		
+		<fieldset>
+		<legend>#{msg.listaCadastros} &#8226; #{msg.usuarios}</legend>
+
+		<h:dataTable id="paginas" value="#{usuarioControlador.todos}" var="item" columnClasses=",,,colunaDireita,colunaEsquerda" 
+		headerClass="cabecalho" rowClasses="celulaSuperior, celulaInferior" styleClass="tabela">  	
+		
+		<h:column>
+			<f:facet name="header">#{msg.nome}</f:facet>
+			<h:outputText id="nome" value="#{item.usu_nome}" />
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">#{msg.email}</f:facet>
+			<h:outputText id="email" value="#{item.usu_email}"/>
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">#{msg.perfil}</f:facet>
+			<h:panelGroup id="p1" rendered="#{item.usu_perfil == 'U'}">#{msg.usuario}</h:panelGroup>
+			<h:panelGroup id="p2" rendered="#{item.usu_perfil == 'A'}">#{msg.administrador}</h:panelGroup>
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">#{msg.edicao}</f:facet>
+			<h:commandLink value="#{msg.atualizar}" action="#{usuarioControlador.editar}">
+			<f:setPropertyActionListener target="#{usuarioControlador.usuario}" value="#{item}"/>
+			</h:commandLink>
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">#{msg.baixa}</f:facet>
+			<h:commandLink value="#{msg.excluir}" action="#{usuarioControlador.excluir}" onclick="javascript:if (!confirm('#{msg.mensagemPergunta}')) return false;">
+			<f:setPropertyActionListener target="#{usuarioControlador.usuario}" value="#{item}"/>
+			</h:commandLink>
+		</h:column>
+			
+		</h:dataTable>
+
+		<h:panelGrid columns="2">
+			<h:commandButton id="novo" value="#{msg.novo}" action="#{usuarioControlador.novoUsuario}" immediate="true" styleClass="botoes"/>
+			<h:messages infoClass="aviso" warnClass="advertencia" errorClass="erro" />
+		</h:panelGrid>
+
+		</fieldset>
+
+	</ui:define>
+
+</ui:composition>
